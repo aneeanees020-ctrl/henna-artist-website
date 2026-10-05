@@ -1,1 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Henna Artist | Admin</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       ADMIN LOGIN
+  ========================== -->
+
+  <div id="adminLogin" class="admin-login">
+
+    <div class="login-box">
+
+      <div class="login-logo">
+        HENNA <span>ARTIST</span>
+      </div>
+
+      <p class="login-label">
+        ADMIN PANEL
+      </p>
+
+      <h1>
+        Welcome Back
+      </h1>
+
+      <p class="login-subtitle">
+        Please login to access your admin dashboard.
+      </p>
+
+
+      <form id="loginForm">
+
+        <!-- USERNAME -->
+
+        <div class="login-field">
+
+          <label for="adminUsername">
+            Username
+          </label>
+
+          <input
+            type="text"
+            id="adminUsername"
+            name="username"
+            placeholder="Enter username"
+            autocomplete="username"
+            required
+          >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="login-field">
+
+          <label for="adminPassword">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="adminPassword"
+            name="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <!-- LOGIN ERROR -->
+
+        <p
+          id="loginError"
+          class="login-error"
+          hidden>
+        </p>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+          type="submit"
+          id="loginButton"
+          class="login-button">
+
+          Login
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       ADMIN DASHBOARD
+  ========================== -->
+
+  <div
+    class="admin-dashboard"
+    id="adminDashboard"
+    hidden>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+      <div class="admin-logo">
+        HENNA <span>ARTIST</span>
+      </div>
+
+      <p class="sidebar-label">
+        ADMIN PANEL
+      </p>
+
+      <nav class="admin-nav">
+
+        <a
+          href="#"
+          class="active">
+
+          📊 Dashboard
+
+        </a>
+
+        <a href="#bookings">
+
+          📅 Bookings
+
+        </a>
+
+        <a href="#gallery">
+
+          🖼 Gallery
+
+        </a>
+
+      </nav>
+
+
+      <!-- LOGOUT -->
+
+      <a
+        href="#"
+        class="logout"
+        id="logoutButton">
+
+        ← Logout
+
+      </a>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+
+      <div class="dashboard-header">
+
+        <div>
+
+          <p class="admin-label">
+            ADMINISTRATOR
+          </p>
+
+          <h1>
+            Dashboard
+          </h1>
+
+        </div>
+
+        <div class="welcome-admin">
+          Welcome, Admin
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================
+           STAT CARDS
+      ========================== -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <span>📅</span>
+
+          <p>
+            Total Bookings
+          </p>
+
+          <h2 id="totalBookings">
+            0
+          </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>⏳</span>
+
+          <p>
+            Pending
+          </p>
+
+          <h2 id="pendingBookings">
+            0
+          </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>✓</span>
+
+          <p>
+            Confirmed
+          </p>
+
+          <h2 id="confirmedBookings">
+            0
+          </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <span>🖼</span>
+
+          <p>
+            Gallery Photos
+          </p>
+
+          <h2 id="galleryPhotos">
+            0
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================
+           RECENT BOOKINGS
+      ========================== -->
+
+      <section
+        class="recent-bookings"
+        id="bookings">
+
+        <div class="section-title">
+
+          <div>
+
+            <p class="admin-label">
+              BOOKING MANAGEMENT
+            </p>
+
+            <h2>
+              Recent Bookings
+            </h2>
+
+          </div>
+
+
+          <button
+            type="button"
+            id="viewAllBookings"
+            class="view-all-button">
+
+            View All
+
+          </button>
+
+        </div>
+
+
+
+        <!-- SEARCH + FILTER -->
+
+        <div class="booking-controls">
+
+          <input
+            type="text"
+            id="bookingSearch"
+            class="booking-search"
+            placeholder="Search name or phone..."
+          >
+
+          <select
+            id="bookingStatusFilter"
+            class="booking-filter">
+
+            <option value="all">
+              All Status
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="confirmed">
+              Confirmed
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <!-- BOOKING TABLE -->
+
+        <div class="booking-table">
+
+          <div class="table-head">
+
+            <span>
+              Name
+            </span>
+
+            <span>
+              Date
+            </span>
+
+            <span>
+              Event
+            </span>
+
+            <span>
+              Status
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           GALLERY MANAGEMENT
+      ========================== -->
+
+      <section
+        class="gallery-management"
+        id="gallery">
+
+        <div class="section-title">
+
+          <div>
+
+            <p class="admin-label">
+              GALLERY MANAGEMENT
+            </p>
+
+            <h2>
+              Gallery Photos
+            </h2>
+
+          </div>
+
+          <span id="galleryCount">
+            0 Photos
+          </span>
+
+        </div>
+
+
+
+        <!-- GALLERY UPLOAD -->
+
+        <div class="gallery-upload">
+
+          <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            hidden
+          >
+
+
+          <button
+            type="button"
+            id="uploadButton"
+            class="upload-button"
+            onclick="document.getElementById('photoInput').click();">
+
+            + Upload Photo
+
+          </button>
+
+
+          <span id="uploadStatus"></span>
+
+        </div>
+
+
+
+        <!-- ADMIN GALLERY -->
+
+        <div
+          id="adminGallery"
+          class="admin-gallery">
+
+          <p class="gallery-loading">
+            Loading gallery...
+          </p>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
