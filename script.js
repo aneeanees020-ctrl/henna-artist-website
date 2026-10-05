@@ -347,21 +347,29 @@ if (bookingBackHome) {
 
 }
 
-/* Hidden Admin Button */
-.hidden-admin-button {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  padding: 12px 18px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-}
+// Secret Admin Access
 
-.hidden-admin-button.show {
-  display: block;
-}
+document.addEventListener("keydown", function (event) {
+
+  if (
+    event.ctrlKey &&
+    event.shiftKey &&
+    event.key.toLowerCase() === "a"
+  ) {
+
+    const adminButton =
+      document.getElementById("hiddenAdminButton");
+
+    if (adminButton) {
+
+      if (adminButton.classList.contains("show")) {
+        adminButton.classList.remove("show");
+      } else {
+        adminButton.classList.add("show");
+      }
+
+    }
+
+  }
+
+});
