@@ -492,19 +492,40 @@ function loadBookings() {
   const callbackName =
     "bookingCallback_" + Date.now();
 
-  window[callbackName] = function (bookings) {
-    allBookingsData =
-      Array.isArray(bookings)
-        ? bookings.filter(function (booking) {
-            return (
-              booking &&
-              booking.name &&
-              booking.name !== "Name"
-            );
-          })
-        : [];
+ window[callbackName] = function (response) {
 
-    renderBookings();
+  const bookings =
+    response && Array.isArray(response.bookings)
+      ? response.bookings
+      : [];
+
+  allBookingsData =
+    bookings.filter(function (booking) {
+
+      return (
+        booking &&
+        booking.name &&
+        booking.name !== "Name"
+      );
+
+    });
+
+  console.log(
+    "BOOKINGS LOADED:",
+    allBookingsData
+  );
+
+  renderBookings();
+
+  const script =
+    document.getElementById(callbackName);
+
+  if (script) {
+    script.remove();
+  }
+
+  delete window[callbackName];
+};
 
     const script =
       document.getElementById(callbackName);
