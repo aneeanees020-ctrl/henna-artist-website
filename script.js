@@ -349,27 +349,26 @@ if (bookingBackHome) {
 
 // Secret Admin Access
 
+let adminSecret = "";
+
 document.addEventListener("keydown", function (event) {
 
-  if (
-    event.ctrlKey &&
-    event.shiftKey &&
-    event.key.toLowerCase() === "a"
-  ) {
+  adminSecret += event.key.toLowerCase();
+
+  if (adminSecret.length > 5) {
+    adminSecret = adminSecret.slice(-5);
+  }
+
+  if (adminSecret === "admin") {
 
     const adminButton =
       document.getElementById("hiddenAdminButton");
 
     if (adminButton) {
-
-      if (adminButton.classList.contains("show")) {
-        adminButton.classList.remove("show");
-      } else {
-        adminButton.classList.add("show");
-      }
-
+      adminButton.classList.toggle("show");
     }
 
+    adminSecret = "";
   }
 
 });
