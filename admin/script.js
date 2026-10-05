@@ -24,7 +24,7 @@ function securityRequest(params) {
   return new Promise(function(resolve, reject) {
 
     let attempts = 0;
-    const maxAttempts = 4;
+    const maxAttempts = 3;
 
     function tryRequest() {
 
@@ -42,58 +42,59 @@ function securityRequest(params) {
       const query =
         Object.keys(params)
           .map(function(key) {
+
             return (
               encodeURIComponent(key) +
               "=" +
               encodeURIComponent(params[key])
             );
+
           })
           .join("&");
 
-      let finished = false;
+      let completed = false;
 
-      function cleanup() {
+      window[callbackName] = function(data) {
+
+        if (completed) return;
+
+        completed = true;
+
         if (script.parentNode) {
           script.parentNode.removeChild(script);
         }
 
-        try {
-          delete window[callbackName];
-        } catch (e) {
-          window[callbackName] = undefined;
-        }
-      }
-
-      window[callbackName] = function(data) {
-
-        if (finished) return;
-
-        finished = true;
-        cleanup();
+        delete window[callbackName];
 
         resolve(data);
       };
 
+
       script.onerror = function() {
 
-        if (finished) return;
-
-        finished = true;
-        cleanup();
+        if (completed) return;
 
         if (attempts < maxAttempts) {
 
           console.log(
-            "Security API retry:",
+            "Security API request failed. Retrying:",
             attempts
           );
 
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+
           setTimeout(
             tryRequest,
-            3000
+            2000
           );
 
         } else {
+
+          completed = true;
+
+          delete window[callbackName];
 
           reject(
             new Error(
@@ -102,6 +103,7 @@ function securityRequest(params) {
           );
         }
       };
+
 
       script.src =
         SECURITY_API +
@@ -112,37 +114,59 @@ function securityRequest(params) {
         "&_=" +
         Date.now();
 
+
       document.body.appendChild(script);
+
+
+      /*
+        Give Google Apps Script enough time.
+        Do NOT delete the callback while waiting.
+      */
 
       setTimeout(function() {
 
-        if (finished) return;
-
-        finished = true;
-        cleanup();
+        if (completed) return;
 
         if (attempts < maxAttempts) {
 
           console.log(
-            "Security API timeout. Retrying:",
+            "Security API slow. Retrying:",
             attempts
           );
 
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+
+          /*
+            Keep the callback alive so a late
+            Google response can still be received.
+          */
+
           setTimeout(
             tryRequest,
-            3000
+            2000
           );
 
         } else {
 
+          completed = true;
+
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+
+          delete window[callbackName];
+
           reject(
             new Error(
-              "Security API request timed out after retries."
+              "Security API request timed out."
             )
           );
         }
 
-      }, 7000);
+      }, 15000);
+
     }
 
     tryRequest();
