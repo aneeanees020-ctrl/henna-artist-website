@@ -1,0 +1,757 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #f5efe6;
+  color: #2c211b;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.admin-dashboard {
+  min-height: 100vh;
+  display: flex;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  padding: 38px 25px;
+  background: #241914;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.admin-logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.admin-logo span {
+  font-weight: normal;
+}
+
+.sidebar-label,
+.admin-label {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #bfa990;
+  text-transform: uppercase;
+}
+
+.sidebar-label {
+  margin-bottom: 18px;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-nav a {
+  padding: 14px 16px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.logout {
+  margin-top: auto;
+  padding: 14px 16px;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  padding: 55px 6%;
+  overflow-x: hidden;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 45px;
+}
+
+.dashboard-header h1 {
+  font-size: 52px;
+  font-weight: normal;
+  line-height: 1;
+  margin-top: 12px;
+}
+
+.welcome-admin {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #6e5d4d;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 50px;
+}
+
+.stat-card {
+  padding: 25px;
+  background: #fbf8f2;
+  border: 1px solid #d8cbbb;
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card span {
+  font-size: 22px;
+}
+
+.stat-card p {
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #76685b;
+}
+
+.stat-card h2 {
+  margin-top: 8px;
+  font-size: 36px;
+  font-weight: normal;
+}
+
+
+/* =========================
+   BOOKINGS
+========================= */
+
+.recent-bookings {
+  background: #fbf8f2;
+  border: 1px solid #d8cbbb;
+  padding: 32px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.section-title h2 {
+  margin-top: 10px;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.section-title > a {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #6e5d4d;
+}
+
+
+/* =========================
+   VIEW ALL BUTTON
+========================= */
+
+.view-all-button {
+  border: none;
+  background: transparent;
+  color: #6e5d4d;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 0;
+  transition: 0.3s;
+}
+
+.view-all-button:hover {
+  color: #2c211b;
+  text-decoration: underline;
+}
+
+
+/* =========================
+   SEARCH + FILTER
+========================= */
+
+.booking-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.booking-search,
+.booking-filter {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #d8cbbb;
+  background: #fffdf8;
+  color: #2c211b;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  outline: none;
+  border-radius: 2px;
+}
+
+.booking-search {
+  width: 280px;
+}
+
+.booking-filter {
+  width: 160px;
+  cursor: pointer;
+}
+
+.booking-search::placeholder {
+  color: #9a8c7d;
+}
+
+.booking-search:focus,
+.booking-filter:focus {
+  border-color: #806f60;
+}
+
+
+/* =========================
+   BOOKING TABLE
+========================= */
+
+.booking-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-head,
+.booking-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 1fr;
+  gap: 20px;
+  align-items: center;
+  min-width: 650px;
+  padding: 17px 10px;
+}
+
+.table-head {
+  border-bottom: 1px solid #d8cbbb;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #806f60;
+}
+
+.booking-row {
+  border-bottom: 1px solid #e7ded2;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.booking-row:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pending {
+  color: #a47743;
+  font-weight: normal;
+}
+
+.confirmed {
+  color: #55745c;
+  font-weight: normal;
+}
+
+
+/* =========================
+   CONFIRM BUTTON
+========================= */
+
+.confirm-button {
+  padding: 6px 12px;
+  border: 1px solid #55745c;
+  border-radius: 20px;
+  background: transparent;
+  color: #55745c;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  transition: 0.3s;
+}
+
+.confirm-button:hover {
+  background: #55745c;
+  color: white;
+}
+
+
+/* =========================
+   GALLERY MANAGEMENT
+========================= */
+
+.gallery-management {
+  margin-top: 50px;
+  padding: 32px;
+  background: #fbf8f2;
+  border: 1px solid #d8cbbb;
+}
+
+.gallery-management .section-title {
+  margin-bottom: 30px;
+}
+
+#galleryCount {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #6e5d4d;
+}
+
+
+/* =========================
+   GALLERY UPLOAD
+========================= */
+
+.gallery-upload {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.upload-button {
+  padding: 12px 22px;
+  border: 1px solid #55745c;
+  border-radius: 2px;
+  background: #55745c;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-button:hover {
+  background: #3f5d46;
+}
+
+.upload-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#uploadStatus {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #55745c;
+}
+
+
+/* =========================
+   ADMIN GALLERY
+========================= */
+
+.admin-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #eee5da;
+  border: 1px solid #d8cbbb;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-photo-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 2px;
+  background: #a33c32;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.95;
+  transition: 0.3s;
+}
+
+.delete-photo-button:hover {
+  background: #78251f;
+}
+
+.delete-photo-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* =========================
+   GALLERY LOADING
+========================= */
+
+.gallery-loading {
+  grid-column: 1 / -1;
+  padding: 40px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #806f60;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .admin-dashboard {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 22px 18px;
+  }
+
+  .admin-logo {
+    margin-bottom: 25px;
+  }
+
+  .sidebar-label {
+    margin-bottom: 10px;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .admin-nav a {
+    padding: 11px 12px;
+    font-size: 12px;
+  }
+
+  .logout {
+    margin-top: 15px;
+  }
+
+  .dashboard-main {
+    padding: 30px 18px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 42px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .recent-bookings {
+    padding: 20px;
+  }
+
+  .gallery-management {
+    padding: 20px;
+  }
+
+  .section-title {
+    align-items: flex-start;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+
+  .booking-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .booking-search,
+  .booking-filter {
+    width: 100%;
+  }
+
+  .booking-table {
+    overflow-x: auto;
+  }
+
+  .admin-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .delete-photo-button {
+    right: 7px;
+    bottom: 7px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+}
+/* =========================
+   SECURE ADMIN LOGIN
+========================= */
+
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5efe6;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 430px;
+  background: #241914;
+  padding: 45px 40px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.login-logo {
+  color: #ffffff;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+
+.login-logo span {
+  display: block;
+  color: #d8c2a8;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.login-label {
+  color: #c9b29a;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+.login-box h1 {
+  color: #ffffff;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  font-weight: normal;
+  margin: 0 0 10px;
+}
+
+.login-subtitle {
+  color: #cfc5bd;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.login-field {
+  margin-bottom: 20px;
+}
+
+.login-field label {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.login-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #5b4b42;
+  border-radius: 3px;
+  background: #30241f;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-field input::placeholder {
+  color: #a99d95;
+}
+
+.login-field input:focus {
+  border-color: #d8c2a8;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 3px;
+  background: #d8c2a8;
+  color: #241914;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-button:hover {
+  opacity: 0.9;
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-error {
+  color: #e8a9a9;
+  font-size: 13px;
+  margin: -5px 0 15px;
+}
+
+
+/* =========================
+   HIDDEN ADMIN DASHBOARD
+========================= */
+
+#adminDashboard[hidden] {
+  display: none !important;
+}
+
+
+/* =========================
+   MOBILE LOGIN
+========================= */
+
+@media (max-width: 500px) {
+
+  .admin-login {
+    padding: 20px;
+  }
+
+  .login-box {
+    padding: 35px 25px;
+  }
+
+  .login-box h1 {
+    font-size: 29px;
+  }
+
+}
