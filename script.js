@@ -365,7 +365,13 @@ document.addEventListener("keydown", function (event) {
       document.getElementById("hiddenAdminButton");
 
     if (adminButton) {
-      adminButton.classList.toggle("show");
+
+      if (adminButton.style.display === "none") {
+        adminButton.style.display = "block";
+      } else {
+        adminButton.style.display = "none";
+      }
+
     }
 
     adminSecret = "";
