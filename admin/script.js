@@ -1465,73 +1465,86 @@ function escapeHtml(value) {
    START
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
+function initAdminPanel() {
 
-    /* LOGIN FORM */
+  /* LOGIN FORM */
 
-    const loginForm =
-      document.getElementById(
-        "loginForm"
-      );
+  const loginForm =
+    document.getElementById("loginForm");
 
-    if (loginForm) {
-      loginForm.addEventListener(
-        "submit",
-        function (event) {
+  if (loginForm) {
 
-          event.preventDefault();
+    loginForm.addEventListener(
+      "submit",
+      function (event) {
 
-          adminLogin();
-        }
-      );
-    }
+        event.preventDefault();
 
-    /* LOGOUT */
-
-    const logoutButton =
-      document.getElementById(
-        "logoutButton"
-      );
-
-    if (logoutButton) {
-      logoutButton.addEventListener(
-        "click",
-        function (event) {
-
-          event.preventDefault();
-
-          adminLogout();
-        }
-      );
-    }
-
-    /* PHOTO INPUT */
-
-    const photoInput =
-      document.getElementById(
-        "photoInput"
-      );
-
-    if (photoInput) {
-      photoInput.addEventListener(
-        "change",
-        function () {
-
-          const file =
-            photoInput.files &&
-            photoInput.files[0];
-
-          if (file) {
-            uploadPhoto(file);
-          }
-        }
-      );
-    }
-
-    /* CHECK SESSION */
-
-    checkAdminSession();
+        adminLogin();
+      }
+    );
   }
-);
+
+
+  /* LOGOUT */
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+  if (logoutButton) {
+
+    logoutButton.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+        adminLogout();
+      }
+    );
+  }
+
+
+  /* PHOTO INPUT */
+
+  const photoInput =
+    document.getElementById("photoInput");
+
+  if (photoInput) {
+
+    photoInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          photoInput.files &&
+          photoInput.files[0];
+
+        if (file) {
+          uploadPhoto(file);
+        }
+      }
+    );
+  }
+
+
+  /* CHECK SESSION */
+
+  checkAdminSession();
+}
+
+
+/* START ADMIN PANEL */
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initAdminPanel
+  );
+
+} else {
+
+  initAdminPanel();
+
+}
