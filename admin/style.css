@@ -277,13 +277,23 @@ a {
 .table-head,
 .booking-row {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1.5fr 1fr;
+  grid-template-columns:
+    1.2fr
+    1.2fr
+    1.2fr
+    1.2fr
+    0.7fr
+    1.2fr
+    1.5fr
+    1.2fr;
+
   gap: 20px;
   align-items: center;
-  min-width: 650px;
+
+  min-width: 1200px;
+
   padding: 17px 10px;
 }
-
 .table-head {
   border-bottom: 1px solid #d8cbbb;
   font-family: Arial, sans-serif;
