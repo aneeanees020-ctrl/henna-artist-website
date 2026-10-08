@@ -476,12 +476,12 @@ const GALLERY_API =
 let allBookingsData = [];
 let showAllBookings = false;
 
-
 /* =========================================================
    LOAD BOOKINGS
 ========================================================= */
 
 function loadBookings() {
+
   const bookingTable =
     document.querySelector(".booking-table");
 
@@ -489,94 +489,151 @@ function loadBookings() {
     return;
   }
 
+  bookingTable.innerHTML =
+    '<div class="table-head">' +
+      "<span>Name</span>" +
+      "<span>Phone</span>" +
+      "<span>Date</span>" +
+      "<span>Event Type</span>" +
+      "<span>People</span>" +
+      "<span>Location</span>" +
+      "<span>Design Preference</span>" +
+      "<span>Status</span>" +
+    "</div>" +
+
+    '<div class="booking-row">' +
+      "<span>Loading bookings...</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+      "<span>-</span>" +
+    "</div>";
+
+
   const callbackName =
-    "bookingCallback_" + Date.now();
+    "bookingCallback_" +
+    Date.now();
 
- window[callbackName] = function (response) {
 
-  const bookings =
-    response && Array.isArray(response.bookings)
-      ? response.bookings
-      : [];
+  window[callbackName] =
+    function (response) {
 
-  allBookingsData =
-    bookings.filter(function (booking) {
-
-      return (
-        booking &&
-        booking.name &&
-        booking.name !== "Name"
+      console.log(
+        "BOOKING API RESPONSE:",
+        response
       );
 
-    });
 
-  console.log(
-    "BOOKINGS LOADED:",
-    allBookingsData
-  );
+      const bookings =
+        response &&
+        Array.isArray(response.bookings)
+          ? response.bookings
+          : [];
 
-  renderBookings();
+
+      allBookingsData =
+        bookings.filter(
+          function (booking) {
+
+            return (
+              booking &&
+              booking.name &&
+              booking.name !== "Name"
+            );
+
+          }
+        );
+
+
+      console.log(
+        "BOOKINGS LOADED:",
+        allBookingsData
+      );
+
+
+      renderBookings();
+
+
+      const script =
+        document.getElementById(
+          callbackName
+        );
+
+
+      if (script) {
+        script.remove();
+      }
+
+
+      delete window[
+        callbackName
+      ];
+
+    };
+
 
   const script =
-    document.getElementById(callbackName);
+    document.createElement(
+      "script"
+    );
 
-  if (script) {
-    script.remove();
-  }
 
-  delete window[callbackName];
-};
+  script.id =
+    callbackName;
 
-    const script =
-      document.getElementById(callbackName);
-
-    if (script) {
-      script.remove();
-    }
-
-    delete window[callbackName];
-  };
-
-  const script =
-    document.createElement("script");
-
-  script.id = callbackName;
 
   script.src =
     BOOKING_API +
     "?action=bookings&callback=" +
-    encodeURIComponent(callbackName);
+    encodeURIComponent(
+      callbackName
+    );
 
-  script.onerror = function () {
-    bookingTable.innerHTML =
-      '<div class="table-head">' +
-        "<span>Name</span>" +
-        "<span>Phone</span>" +
-        "<span>Date</span>" +
-        "<span>Event Type</span>" +
-        "<span>People</span>" +
-        "<span>Location</span>" +
-        "<span>Design Preference</span>" +
-        "<span>Status</span>" +
-      "</div>" +
 
-      '<div class="booking-row">' +
-        "<span>Could not load bookings.</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-        "<span>-</span>" +
-      "</div>";
+  script.onerror =
+    function () {
 
-    delete window[callbackName];
+      bookingTable.innerHTML =
+        '<div class="table-head">' +
+          "<span>Name</span>" +
+          "<span>Phone</span>" +
+          "<span>Date</span>" +
+          "<span>Event Type</span>" +
+          "<span>People</span>" +
+          "<span>Location</span>" +
+          "<span>Design Preference</span>" +
+          "<span>Status</span>" +
+        "</div>" +
 
-    script.remove();
-  };
+        '<div class="booking-row">' +
+          "<span>Could not load bookings.</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+          "<span>-</span>" +
+        "</div>";
 
-  document.body.appendChild(script);
+
+      delete window[
+        callbackName
+      ];
+
+
+      script.remove();
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
 }
 
 
